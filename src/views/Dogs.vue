@@ -6,7 +6,7 @@
       <!-- First Column contains links -->
        <template #cell(name)="data">
 
-        <router-link :to="`/pets/${data.value.replace(/[^a-z]+/i,'-').toLowerCase()}`">
+        <router-link :to="`/pets/dogs/${data.index}`">
         {{ data.value }}
         </router-link>
 
@@ -18,15 +18,16 @@
 </template>
 
 <script>
-// Importing Dogs Array
-import dogs from '@/data/dogs.js';
+// Importing Dogs Array from vuex store state
+import { mapState } from 'vuex';
 
 export default {
   name: 'Dogs',
-  data() {
-  return {
-  dogs  
-  }  
+  
+  computed: {
+  ...mapState([
+  'dogs'  
+  ])  
   }
 }
 </script>

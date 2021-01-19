@@ -5,9 +5,11 @@
       
       <!-- First Column contains links -->
       <template #cell(name)="data">
-       <router-link :to="`/pets/${data.value.replace(/[^a-z]+/i,'-').toLowerCase()}`">
+
+       <router-link :to="`/pets/cats/${data.index}`">
         {{ data.value }}
         </router-link>
+
       </template>  
 
     </b-table>
@@ -16,18 +18,19 @@
 
 
 <script>
-// Importing Cats Array from data/cats.js
-// @ = source directory
-import cats from '@/data/cats.js';
+// Importing Cats Array from vuex store state
+import { mapState } from 'vuex'
 
 export default {
- name: 'Cats',
+name: 'Cats',
 
- data() {
- return {
- cats
- }
- } 
+computed: {
+...mapState([
+'cats'  
+])
+},
+ 
+ 
 
 }
 </script>
